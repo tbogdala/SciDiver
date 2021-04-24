@@ -68,7 +68,7 @@ shape = SubResource( 1 )
 [node name="Door_Left" type="AnimatedSprite" parent="."]
 position = Vector2( 32, 120 )
 frames = ExtResource( 2 )
-animation = "Closed"
+animation = "Open"
 
 [node name="Door_left_TravelArea" type="Area2D" parent="Door_Left"]
 collision_mask = 2
@@ -81,7 +81,7 @@ shape = SubResource( 2 )
 position = Vector2( 288, 120 )
 rotation = 3.14159
 frames = ExtResource( 2 )
-animation = "Closed"
+animation = "Open"
 
 [node name="Door_right_TravelArea" type="Area2D" parent="Door_Right"]
 collision_mask = 2
