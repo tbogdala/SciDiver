@@ -8,6 +8,8 @@ var level_gen: LevelGen
 var level_root_node: LevelGen.RoomTreeNode
 var current_node: LevelGen.RoomTreeNode
 
+enum Directions {NORTH, EAST, SOUTH, WEST}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	level_gen = LevelGenClass.new()
@@ -16,52 +18,62 @@ func _ready():
 	level_gen.instance_room_to(self, level_root_node)
 	position_player_south(1.0)
 
-func request_travel_north() -> bool:
+func request_travel_north():
+	request_travel_dir(Directions.NORTH, current_node.north)
+
+func request_travel_east():
+	request_travel_dir(Directions.EAST, current_node.east)
+	
+func request_travel_south():
+	request_travel_dir(Directions.SOUTH, current_node.south)
+
+func request_travel_west():
+	request_travel_dir(Directions.WEST, current_node.west)
+
+func request_travel_dir(dir, new_node: LevelGen.RoomTreeNode):
 	# ensure we could travel
-	if current_node.north == null:
-		push_error("attempted travel north where there's no door")
-		return false
+	if new_node == null:
+		push_error("attempted travel where there's no door")
+		return
 	
 	# remove the current room Node2D from the tree
 	remove_child(current_node.room_inst)
-	level_gen.instance_room_to(self, current_node.north)
+	level_gen.instance_room_to(self, new_node)
 	
 	# update the current node tracking
-	current_node = current_node.north
+	current_node = new_node
 	
-	position_player_south(1.0)
-	return true 
-	
-func request_travel_south() -> bool:
-	# ensure we could travel
-	if current_node.south == null:
-		push_error("attempted travel south where there's no door")
-		return false
-	
-	# remove the current room Node2D from the tree
-	remove_child(current_node.room_inst)
-	level_gen.instance_room_to(self, current_node.south)
-	
-	# update the current node tracking
-	current_node = current_node.south
-	
-	position_player_north(1.0)
-	return true 
+	match dir:
+		Directions.NORTH:
+			position_player_south(1.0)
+		Directions.EAST:
+			position_player_west(1.0)
+		Directions.SOUTH:
+			position_player_north(1.0)
+		Directions.WEST:
+			position_player_east(1.0) 
+
+# hard reset player position to north door
+func position_player_north(delay: float):
+	position_player_by_loc(delay, Vector2(160,55))
+
+# hard reset player position to east door
+func position_player_east(delay: float):
+	position_player_by_loc(delay, Vector2(260,120))
 	
 # hard reset player position to south door
 func position_player_south(delay: float):
-	var player = get_node(PLAYER_NAME)
-	assert(player) 
-	player.visible = false
-	yield(get_tree().create_timer(delay), "timeout")
-	player.visible = true
-	player.set_global_position(Vector2(160,175))
-	
+	position_player_by_loc(delay, Vector2(160,175))
+
+# hard reset player position to west door
+func position_player_west(delay: float):
+	position_player_by_loc(delay, Vector2(55,120))
+
 # hard reset player position to north door
-func position_player_north(delay: float):
+func position_player_by_loc(delay: float, loc: Vector2):
 	var player = get_node(PLAYER_NAME)
 	assert(player)
 	player.visible = false
 	yield(get_tree().create_timer(delay), "timeout")
 	player.visible = true
-	player.set_global_position(Vector2(160,55))
+	player.set_global_position(loc)

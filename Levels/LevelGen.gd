@@ -48,12 +48,26 @@ func instance_room_to(root: Node2D, node: RoomTreeNode) -> Node2D:
 		room.door_top.visible = false
 		room.door_close_top()
 		
+	if node.east: 
+		room.door_right.visible = true
+		room.door_open_right()
+	else:
+		room.door_right.visible = false
+		room.door_close_right()
+		
 	if node.south:
 		room.door_bottom.visible = true
 		room.door_open_bottom()
 	else:
 		room.door_bottom.visible = false
 		room.door_close_bottom()
+		
+	if node.west: 
+		room.door_left.visible = true
+		room.door_open_left()
+	else:
+		room.door_left.visible = false
+		room.door_close_left()
 		
 	return room
 
