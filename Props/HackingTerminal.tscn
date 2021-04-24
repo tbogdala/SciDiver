@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Props/HackingTerminal.res" type="SpriteFrames" id=1]
 [ext_resource path="res://Props/HackingTerminalShadow.png" type="Texture" id=2]
+[ext_resource path="res://Props/HackingTerminal.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 16 )
@@ -9,8 +10,9 @@ extents = Vector2( 24, 16 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 8 )
 
-[node name="Node2D" type="StaticBody2D"]
+[node name="HackingTerminal" type="StaticBody2D"]
 collision_mask = 0
+script = ExtResource( 3 )
 
 [node name="Shadow" type="Sprite" parent="."]
 position = Vector2( 15.6811, 13.2973 )
@@ -26,11 +28,6 @@ flip_h = true
 flip_v = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 1 )
-animation = "Off"
-offset = Vector2( 24, -24 )
-
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "Off"
 offset = Vector2( 24, -24 )

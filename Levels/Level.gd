@@ -4,7 +4,6 @@ class_name Level
 enum Directions {NORTH, EAST, SOUTH, WEST}
 
 const PLAYER_NAME = "Player"
-const LevelGenClass = preload("res://Levels/LevelGen.gd")
 
 onready var hacking_progress_bar = $Canvas/GUI/HackingProgress
 
@@ -12,7 +11,7 @@ var level_gen: LevelGen
 var level_root_node: LevelGen.RoomTreeNode
 var current_node: LevelGen.RoomTreeNode
 
-const _hack_duration_required: float = 5.0
+const _hack_duration_required: float = 1.0
 const _hack_timer_interval: float = 0.20
 var _current_hack_duration: float
 var _hacking_timer: Timer
@@ -23,7 +22,7 @@ func _ready():
 	#randomize() 
 	print("RANDOMIZE IS OFF")
 	
-	level_gen = LevelGenClass.new()
+	level_gen = LevelGen.new()
 	level_gen.max_walk_length = 5
 	level_gen.max_rooms_total = 7
 	level_gen.min_rooms_total = 3
@@ -77,6 +76,20 @@ func _request_travel_dir(dir, new_node: LevelGen.RoomTreeNode):
 	# update the current node tracking
 	current_node = new_node
 	
+
+func request_travel_down_stairs():
+	print("REQUESTING TRAVEL DOWN STAIRS")
+	self.call_deferred("_do_travel_down_stairs")
+	
+func _do_travel_down_stairs():
+	var root = get_node("/root")
+	root.remove_child(self)
+	
+	var new_level = load("res://Levels/Test.tscn").instance()
+	root.add_child(new_level)
+	
+	self.queue_free()
+	
 	
 # hard reset player position to north door
 func position_player_north(delay: float):
@@ -112,7 +125,8 @@ func start_hacking_terminal():
 	hacking_progress_bar.visible = true
 	_hacking_timer = Timer.new()
 	_hacking_timer.name = "HackingTimer"
-	_hacking_timer.connect("timeout", self, "_on_hacking_timer")
+	var _err = _hacking_timer.connect("timeout", self, "_on_hacking_timer")
+	assert(_err == OK)
 	_hacking_timer.wait_time = _hack_timer_interval
 	_hacking_timer.one_shot = false
 	add_child(_hacking_timer)
@@ -123,6 +137,13 @@ func _on_hacking_timer():
 	if _current_hack_duration >= _hack_duration_required:
 		print("HACK COMPLETE")
 		_hacking_timer.stop()
+		remove_child(_hacking_timer)
+		_hacking_timer.queue_free()
+		
 		hacking_progress_bar.visible = false
+		var stairs_down = current_node.room_inst.get_stairs_down()
+		stairs_down.show_and_enable()
+		var hacking_term = current_node.room_inst.get_hacking_terminal()
+		hacking_term.turn_on()
 	else:
 		hacking_progress_bar.value = _current_hack_duration / _hack_duration_required * 100

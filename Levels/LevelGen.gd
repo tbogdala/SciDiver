@@ -20,7 +20,7 @@ class RoomTreeNode:
 	var west: RoomTreeNode
 	
 	# the room instance Node2D from the scene tree
-	var room_inst: Node2D
+	var room_inst: Room
 	
 	# set to true if this room should have the objective terminal spawned
 	var has_objective_terminal: bool
@@ -132,10 +132,18 @@ func instance_room_to(root: Node2D, node: RoomTreeNode):
 		root.add_child(room)
 	
 		# does it have the objective terminal? if so, spawn that in too
+		# as well as a set of stairs
 		if node.has_objective_terminal:
 			var term: Node2D = _get_objective_terminal_resource().instance()
 			room.add_child(term)
 			term.global_position = Vector2(50, 58)
+			
+			var stairs: StairsDown = _get_stairs_down_resource().instance()
+			stairs.hide_and_disable()
+			room.add_child(stairs)
+			stairs.global_position = Vector2(160, 112)
+			var _err = stairs.connect("StairsDownUsed", root, "request_travel_down_stairs")
+			assert(_err == OK)
 	
 	# show the doors for connected rooms
 	room.enable_travel_areas(false)
@@ -167,7 +175,9 @@ func instance_room_to(root: Node2D, node: RoomTreeNode):
 		room.door_left.visible = false
 		room.door_close_left()
 
-
+func _get_stairs_down_resource() -> Resource:
+	return load("res://Props/StairsDown.tscn")
+	
 func _get_objective_terminal_resource() -> Resource:
 	return load("res://Props/HackingTerminal.tscn")
 	

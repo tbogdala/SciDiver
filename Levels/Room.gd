@@ -38,6 +38,14 @@ func _ready():
 	cs_door_left_travel = door_left.get_node("Door_left_TravelArea/CollisionShape2D")
 	assert(door_left != null and cs_door_left != null and cs_door_left_travel != null)
 
+func get_stairs_down() -> StairsDown:
+	return get_node("StairsDown") as StairsDown
+	
+	
+func get_hacking_terminal() -> HackingTerminal:
+	return get_node("HackingTerminal") as HackingTerminal
+
+
 func enable_travel_areas(enable: bool):
 	cs_door_top_travel.disabled = !enable
 	cs_door_left_travel.disabled = !enable
