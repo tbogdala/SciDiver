@@ -6,14 +6,23 @@ enum Directions {NORTH, EAST, SOUTH, WEST}
 const PLAYER_NAME = "Player"
 const LevelGenClass = preload("res://Levels/LevelGen.gd")
 
+onready var hacking_progress_bar = $Canvas/GUI/HackingProgress
+
 var level_gen: LevelGen
 var level_root_node: LevelGen.RoomTreeNode
 var current_node: LevelGen.RoomTreeNode
 
+const _hack_duration_required: float = 5.0
+const _hack_timer_interval: float = 0.20
+var _current_hack_duration: float
+var _hacking_timer: Timer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	randomize()
+	#randomize() 
+	print("RANDOMIZE IS OFF")
+	
 	level_gen = LevelGenClass.new()
 	level_gen.max_walk_length = 5
 	level_gen.max_rooms_total = 7
@@ -98,3 +107,22 @@ func _position_player_by_loc(delay: float, loc: Vector2):
 	yield(get_tree().create_timer(delay), "timeout")
 	player.visible = true
 	
+func start_hacking_terminal():
+	hacking_progress_bar.value = 0
+	hacking_progress_bar.visible = true
+	_hacking_timer = Timer.new()
+	_hacking_timer.name = "HackingTimer"
+	_hacking_timer.connect("timeout", self, "_on_hacking_timer")
+	_hacking_timer.wait_time = _hack_timer_interval
+	_hacking_timer.one_shot = false
+	add_child(_hacking_timer)
+	_hacking_timer.start()
+
+func _on_hacking_timer():
+	_current_hack_duration += _hack_timer_interval
+	if _current_hack_duration >= _hack_duration_required:
+		print("HACK COMPLETE")
+		_hacking_timer.stop()
+		hacking_progress_bar.visible = false
+	else:
+		hacking_progress_bar.value = _current_hack_duration / _hack_duration_required * 100

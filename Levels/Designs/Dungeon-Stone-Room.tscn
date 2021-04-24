@@ -36,7 +36,7 @@ extents = Vector2( 24, 16 )
 collision_mask = 0
 script = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Walls" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 160, 120 )
 
@@ -47,9 +47,11 @@ animation = "Closed"
 playing = true
 
 [node name="Door_top_TravelArea" type="Area2D" parent="Door_Top"]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Top/Door_top_TravelArea"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Door_Bottom" type="AnimatedSprite" parent="."]
@@ -60,9 +62,11 @@ animation = "Open"
 playing = true
 
 [node name="Door_bottom_TravelArea" type="Area2D" parent="Door_Bottom"]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Bottom/Door_bottom_TravelArea"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Door_Left" type="AnimatedSprite" parent="."]
@@ -71,9 +75,11 @@ frames = ExtResource( 2 )
 animation = "Open"
 
 [node name="Door_left_TravelArea" type="Area2D" parent="Door_Left"]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Left/Door_left_TravelArea"]
+visible = false
 position = Vector2( -0.270157, 0 )
 shape = SubResource( 2 )
 
@@ -84,9 +90,11 @@ frames = ExtResource( 2 )
 animation = "Open"
 
 [node name="Door_right_TravelArea" type="Area2D" parent="Door_Right"]
+visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door_Right/Door_right_TravelArea"]
+visible = false
 shape = SubResource( 3 )
 
 [node name="CollisionShape_L" type="CollisionShape2D" parent="."]

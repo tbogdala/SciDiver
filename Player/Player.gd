@@ -9,8 +9,13 @@ var velocity = Vector2.ZERO
 # have been disabled.
 
 func _physics_process(_delta):
+	if Input.is_action_just_pressed("player_hack"):
+		for area in $PlayerTriggerArea.get_overlapping_areas():
+			if area.name == "HackingArea":
+				var level: Level = get_node("/root/World") as Level
+				level.start_hacking_terminal()
+
 	var input_vector = Vector2.ZERO
-	
 	input_vector.x = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 	input_vector.y = Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
 	input_vector = input_vector.normalized()
@@ -21,3 +26,4 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 	
 	velocity = move_and_slide(velocity)
+	

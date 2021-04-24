@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/ProgressBar-Cap.png" type="Texture" id=1]
+[ext_resource path="res://UI/ProgressBar-Bar.png" type="Texture" id=2]
+[ext_resource path="res://UI/ProgressBar-Under.png" type="Texture" id=3]
+
+[node name="GUI" type="Control"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HackingProgress" type="TextureProgress" parent="."]
+margin_left = 98.7084
+margin_top = 92.3137
+margin_right = 136.708
+margin_bottom = 108.314
+rect_scale = Vector2( 3, 1 )
+value = 33.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressCapL" type="TextureRect" parent="HackingProgress"]
+margin_left = -1.24859
+margin_right = 0.75141
+margin_bottom = 16.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="ProgressCapR" type="TextureRect" parent="HackingProgress"]
+margin_left = 37.0831
+margin_right = 39.0831
+margin_bottom = 16.0
+texture = ExtResource( 1 )
+expand = true
+flip_h = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

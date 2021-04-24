@@ -9,14 +9,21 @@ export var min_rooms_total: int # min total rooms to generate
 export var branch_chance: int # 0..100 odds of walker branching
 export var walker_branch_decay_rate: float # 0..1 how fast the branch_chance decays each walk
 
-var _total_rooms_made
+var _total_rooms_made: int
+var _objective_placed: bool
+var _last_node_processed: RoomTreeNode
 
 class RoomTreeNode:
 	var north: RoomTreeNode
 	var east: RoomTreeNode
 	var south: RoomTreeNode
 	var west: RoomTreeNode
+	
+	# the room instance Node2D from the scene tree
 	var room_inst: Node2D
+	
+	# set to true if this room should have the objective terminal spawned
+	var has_objective_terminal: bool
 	
 	
 # generates a level and returns the 'root' node where the player should spawn.
@@ -28,14 +35,19 @@ func generate_level_nodes() -> RoomTreeNode:
 	
 	var room = RoomTreeNode.new()
 	_total_rooms_made = 0
+	_objective_placed = false
 	_process_node(room)
-	#room.north = RoomTreeNode.new()
-	#room.north.south = room
+	
+	# if we haven't placed the objective yet, place it at the last room made
+	if _objective_placed == false:
+		_last_node_processed.has_objective_terminal = true
+		
 	return room
 
 
 func _process_node(node: RoomTreeNode):
 	var dirs = []
+	_last_node_processed = node
 	
 	if node.north == null:
 		dirs.append(Directions.NORTH)
@@ -78,7 +90,7 @@ func _process_node(node: RoomTreeNode):
 			Directions.WEST:
 				node.west = RoomTreeNode.new()
 				node.west.east = node
-	
+				
 	_total_rooms_made += new_door_count
 	culled_dirs.shuffle()
 	for i in culled_dirs:
@@ -99,11 +111,12 @@ func _process_node(node: RoomTreeNode):
 				node.west = RoomTreeNode.new()
 				node.west.east = node
 				_process_node(node.west)
+		
 
 # Takes the RoomTreeNode and instances a new room and adds it to the level.
 # If an instance already exists, it will get returned.
 # NOTE: root should be a Level type object
-func instance_room_to(root: Node2D, node: RoomTreeNode) -> Node2D:
+func instance_room_to(root: Node2D, node: RoomTreeNode):
 	var room: Room
 	
 	if node.room_inst != null:
@@ -113,11 +126,16 @@ func instance_room_to(root: Node2D, node: RoomTreeNode) -> Node2D:
 		root.add_child(room)
 	else:
 		# create the instance of the selected room resource
-		var room_res = _get_room_scene_to_instance()
-		room = room_res.instance()
+		room = _get_room_scene_resource().instance()
 		room.level = root
 		node.room_inst = room
 		root.add_child(room)
+	
+		# does it have the objective terminal? if so, spawn that in too
+		if node.has_objective_terminal:
+			var term: Node2D = _get_objective_terminal_resource().instance()
+			room.add_child(term)
+			term.global_position = Vector2(50, 58)
 	
 	# show the doors for connected rooms
 	room.enable_travel_areas(false)
@@ -148,10 +166,11 @@ func instance_room_to(root: Node2D, node: RoomTreeNode) -> Node2D:
 	else:
 		room.door_left.visible = false
 		room.door_close_left()
-		
-	return room
 
 
-# returns the room resource to instance. can be extended for theming
-func _get_room_scene_to_instance() -> Resource:
+func _get_objective_terminal_resource() -> Resource:
+	return load("res://Props/HackingTerminal.tscn")
+	
+# returns the room resource to room instance. can be extended for theming
+func _get_room_scene_resource() -> Resource:
 	return load("res://Levels/Designs/Dungeon-Stone-Room.tscn")
