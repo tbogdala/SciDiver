@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/ProgressBar-Cap.png" type="Texture" id=1]
 [ext_resource path="res://UI/ProgressBar-Bar.png" type="Texture" id=2]
 [ext_resource path="res://UI/ProgressBar-Under.png" type="Texture" id=3]
+[ext_resource path="res://UI/GUI.gd" type="Script" id=4]
 
 [node name="GUI" type="Control"]
 show_behind_parent = true
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -42,3 +44,63 @@ flip_h = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameOverUI" type="Control" parent="."]
+margin_left = 113.646
+margin_top = 37.8119
+margin_right = 196.646
+margin_bottom = 85.8119
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="GameOverUI"]
+margin_left = -5.0
+margin_top = -8.0
+margin_right = 87.0
+margin_bottom = 47.0
+color = Color( 0.0627451, 0.054902, 0.054902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverUI"]
+margin_right = 80.0
+margin_bottom = 22.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOverUI/VBoxContainer"]
+margin_right = 80.0
+margin_bottom = 15.0
+text = "GAME OVER!"
+fit_content_height = true
+
+[node name="Button" type="Button" parent="GameOverUI/VBoxContainer"]
+margin_top = 19.0
+margin_right = 80.0
+margin_bottom = 39.0
+text = "restart?"
+flat = true
+
+[node name="ScoresVBox" type="VBoxContainer" parent="."]
+margin_right = 150.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KillsLabel" type="Label" parent="ScoresVBox"]
+margin_right = 150.0
+margin_bottom = 14.0
+text = "Kills:"
+clip_text = true
+
+[node name="DepthLabel" type="Label" parent="ScoresVBox"]
+margin_top = 18.0
+margin_right = 150.0
+margin_bottom = 32.0
+text = "Depth:"
+
+[connection signal="pressed" from="GameOverUI/VBoxContainer/Button" to="." method="_on_Button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Player/Diver.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -46,7 +46,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("DamageArea2D/Hurtbox_L:disabled")
+tracks/3/path = NodePath("Damage_Area2D/Hurtbox_L:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -100,7 +100,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("DamageArea2D/Hurtbox_R:disabled")
+tracks/3/path = NodePath("Damage_Area2D/Hurtbox_R:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -288,44 +288,37 @@ animation = "Run_Right"
 animation = "Run_Left"
 
 [sub_resource type="AnimationNodeAnimation" id=20]
-animation = "Run_Right"
+animation = "Run_Left"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=21]
 blend_point_0/node = SubResource( 17 )
 blend_point_0/pos = Vector2( 1, 0 )
 blend_point_1/node = SubResource( 18 )
-blend_point_1/pos = Vector2( 0, 1 )
+blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 19 )
 blend_point_2/pos = Vector2( -1, 0 )
 blend_point_3/node = SubResource( 20 )
-blend_point_3/pos = Vector2( 0, -1 )
-min_space = Vector2( -1, -1.1 )
+blend_point_3/pos = Vector2( 0, -1.2 )
+min_space = Vector2( -1, -1.2 )
 max_space = Vector2( 1, 1.1 )
 snap = Vector2( 0.2, 0.2 )
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
-switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-
 [sub_resource type="AnimationNodeStateMachine" id=28]
 states/Attack/node = SubResource( 11 )
-states/Attack/position = Vector2( 348, 203 )
+states/Attack/position = Vector2( 354, 212 )
 states/Idle/node = SubResource( 16 )
-states/Idle/position = Vector2( 348, 92 )
+states/Idle/position = Vector2( 354, 92 )
 states/Run/node = SubResource( 21 )
-states/Run/position = Vector2( 582, 92 )
-transitions = [ "Run", "Idle", SubResource( 22 ), "Idle", "Run", SubResource( 23 ), "Attack", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 25 ), "Attack", "Run", SubResource( 26 ), "Run", "Attack", SubResource( 27 ) ]
+states/Run/position = Vector2( 583, 92 )
+transitions = [ "Run", "Idle", SubResource( 22 ), "Idle", "Run", SubResource( 23 ), "Attack", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 25 ) ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
@@ -341,6 +334,10 @@ height = 7.6285
 radius = 7.91657
 height = 4.62351
 
+[sub_resource type="CapsuleShape2D" id=33]
+radius = 4.07978
+height = 10.2903
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 0.0834274, -13.7655 )
 z_index = 10
@@ -355,7 +352,6 @@ texture = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 11
-frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack_Left = SubResource( 1 )
@@ -371,8 +367,8 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 29 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
-parameters/Idle/blend_position = Vector2( -0.178607, 0.373043 )
-parameters/Run/blend_position = Vector2( 0.416751, 0.502586 )
+parameters/Idle/blend_position = Vector2( -0.110535, 0.44 )
+parameters/Run/blend_position = Vector2( -0.0673575, 0.574286 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -381,27 +377,37 @@ rotation = 1.5708
 shape = SubResource( 30 )
 
 [node name="PlayerTriggerArea" type="Area2D" parent="."]
+visible = false
 position = Vector2( -0.662167, -0.26487 )
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTriggerArea"]
-visible = false
 position = Vector2( -0.15749, 11.6223 )
 rotation = 1.5708
 shape = SubResource( 31 )
 
-[node name="DamageArea2D" type="Area2D" parent="."]
+[node name="Damage_Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 16
 
-[node name="Hurtbox_R" type="CollisionShape2D" parent="DamageArea2D"]
+[node name="Hurtbox_R" type="CollisionShape2D" parent="Damage_Area2D"]
 position = Vector2( 10.5862, 2.6877 )
 shape = SubResource( 32 )
 disabled = true
 
-[node name="Hurtbox_L" type="CollisionShape2D" parent="DamageArea2D"]
+[node name="Hurtbox_L" type="CollisionShape2D" parent="Damage_Area2D"]
 position = Vector2( -10.586, 2.688 )
 shape = SubResource( 32 )
 disabled = true
 
-[connection signal="area_entered" from="DamageArea2D" to="." method="_on_DamageArea2D_area_entered"]
+[node name="Hitbox_Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 0
+
+[node name="Hitbox" type="CollisionShape2D" parent="Hitbox_Area2D"]
+position = Vector2( 3.8147e-06, 4.17136 )
+shape = SubResource( 33 )
+
+[connection signal="area_entered" from="Damage_Area2D" to="." method="_on_DamageArea2D_area_entered"]

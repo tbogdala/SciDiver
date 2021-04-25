@@ -4,7 +4,7 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Levels/Level.gd" type="Script" id=3]
 
-[node name="World" type="YSort"]
+[node name="World" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -13,7 +13,8 @@ zoom = Vector2( 4, 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 157.155, 126.951 )
-z_index = 0
+z_index = 5
+z_as_relative = true
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -21,6 +22,19 @@ z_index = 0
 
 [node name="HackingProgress" parent="Canvas/GUI" index="0"]
 visible = false
-rect_scale = Vector2( 3, 0.85 )
+
+[node name="GameOverUI" parent="Canvas/GUI" index="1"]
+visible = false
+
+[node name="ScoresVBox" parent="Canvas/GUI" index="2"]
+margin_right = 200.0
+
+[node name="KillsLabel" parent="Canvas/GUI/ScoresVBox" index="0"]
+margin_right = 200.0
+
+[node name="DepthLabel" parent="Canvas/GUI/ScoresVBox" index="1"]
+margin_right = 200.0
+
+[connection signal="pressed" from="Canvas/GUI/GameOverUI/VBoxContainer/Button" to="." method="_on_GameRestartButton_pressed"]
 
 [editable path="Canvas/GUI"]

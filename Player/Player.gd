@@ -21,7 +21,7 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("player_hack"):
 		for area in $PlayerTriggerArea.get_overlapping_areas():
 			if area.name == "HackingArea":
-				var level: Level = get_node("/root/World") as Level
+				var level = get_node("/root/World")
 				level.start_hacking_terminal()
 
 	var input_vector = Vector2.ZERO
@@ -80,4 +80,14 @@ func _attack_melee_finished():
 
 # melee attack has hit something!
 func _on_DamageArea2D_area_entered(area):
-	area.owner._on_take_damage(1)
+	area.get_parent()._on_take_damage(1)
+	
+func _on_take_damage(_damage: int):
+	if visible == false:
+		print("No damage right now, thanks.")
+		return
+		
+	print("Death, the final sleep!")
+	var level: Level = get_node("/root/World") as Level
+	level.show_game_over_screen()
+	queue_free()

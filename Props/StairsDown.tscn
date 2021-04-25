@@ -10,7 +10,7 @@ extents = Vector2( 16, 16 )
 
 [node name="StairsDown" type="StaticBody2D"]
 position = Vector2( 32, 16 )
-collision_mask = 2
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -21,7 +21,7 @@ position = Vector2( 16, 0 )
 shape = SubResource( 1 )
 
 [node name="StairsDown_AreaTrigger" type="Area2D" parent="."]
-collision_mask = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StairsDown_AreaTrigger"]
 position = Vector2( -16, 0 )
