@@ -51,6 +51,8 @@ _global_script_class_icons={
 [application]
 
 config/name="SciDiver"
+config/description="Ludum Dare 48 Compo Entry by Timothy Bogdala.
+All code and assets are released under the MIT license."
 run/main_scene="res://Levels/Test.tscn"
 config/icon="res://icon.png"
 
