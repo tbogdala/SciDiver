@@ -1,0 +1,115 @@
+{ "frames": [
+   {
+    "filename": "Diver 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "Diver 1.aseprite",
+    "frame": { "x": 48, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 200
+   },
+   {
+    "filename": "Diver 2.aseprite",
+    "frame": { "x": 96, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "Diver 3.aseprite",
+    "frame": { "x": 144, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 150
+   },
+   {
+    "filename": "Diver 4.aseprite",
+    "frame": { "x": 192, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "Diver 5.aseprite",
+    "frame": { "x": 240, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "Diver 6.aseprite",
+    "frame": { "x": 288, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 150
+   },
+   {
+    "filename": "Diver 7.aseprite",
+    "frame": { "x": 336, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "Diver 8.aseprite",
+    "frame": { "x": 384, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "Diver 9.aseprite",
+    "frame": { "x": 432, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   },
+   {
+    "filename": "Diver 10.aseprite",
+    "frame": { "x": 480, "y": 0, "w": 48, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 32 },
+    "sourceSize": { "w": 48, "h": 32 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.27-x64",
+  "image": "Diver.png",
+  "format": "RGBA8888",
+  "size": { "w": 528, "h": 32 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 1, "to": 2, "direction": "forward" },
+   { "name": "Run_R", "from": 3, "to": 6, "direction": "forward" },
+   { "name": "Sowrd_R", "from": 7, "to": 10, "direction": "forward" }
+  ]
+ }
+}
