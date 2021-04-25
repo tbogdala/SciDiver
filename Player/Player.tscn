@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Player/Diver.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Props/FloorShadow.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack_Left"
@@ -288,34 +289,40 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
 
-[sub_resource type="AnimationNodeStateMachine" id=26]
+[sub_resource type="AnimationNodeStateMachine" id=28]
 states/Attack/node = SubResource( 11 )
 states/Attack/position = Vector2( 348, 203 )
 states/Idle/node = SubResource( 16 )
 states/Idle/position = Vector2( 348, 92 )
 states/Run/node = SubResource( 21 )
 states/Run/position = Vector2( 582, 92 )
-transitions = [ "Run", "Idle", SubResource( 22 ), "Idle", "Run", SubResource( 23 ), "Attack", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 25 ), "Attack", "Run", SubResource( 30 ), "Run", "Attack", SubResource( 31 ) ]
+transitions = [ "Run", "Idle", SubResource( 22 ), "Idle", "Run", SubResource( 23 ), "Attack", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 25 ), "Attack", "Run", SubResource( 26 ), "Run", "Attack", SubResource( 27 ) ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
 
-[sub_resource type="CapsuleShape2D" id=28]
+[sub_resource type="CapsuleShape2D" id=30]
 radius = 4.30574
 height = 6.70329
 
-[sub_resource type="CapsuleShape2D" id=29]
+[sub_resource type="CapsuleShape2D" id=31]
 radius = 3.36352
 height = 7.6285
 
 [node name="Player" type="KinematicBody2D"]
-z_index = 1
+position = Vector2( 0.0834274, -13.7655 )
+z_index = 10
+z_as_relative = false
 collision_layer = 2
 script = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 13.4318 )
+texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -331,10 +338,10 @@ anims/Run_Left = SubResource( 5 )
 anims/Run_Right = SubResource( 6 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 26 )
+tree_root = SubResource( 28 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 27 )
+parameters/playback = SubResource( 29 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( -0.178607, 0.373043 )
 parameters/Run/blend_position = Vector2( 0.416751, 0.502586 )
@@ -343,7 +350,7 @@ parameters/Run/blend_position = Vector2( 0.416751, 0.502586 )
 visible = false
 position = Vector2( -1.56414, 10.5721 )
 rotation = 1.5708
-shape = SubResource( 28 )
+shape = SubResource( 30 )
 
 [node name="PlayerTriggerArea" type="Area2D" parent="."]
 visible = false
@@ -354,4 +361,4 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTriggerArea"]
 position = Vector2( -0.15749, 11.6223 )
 rotation = 1.5708
-shape = SubResource( 29 )
+shape = SubResource( 31 )

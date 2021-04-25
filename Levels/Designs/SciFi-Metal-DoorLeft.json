@@ -82,6 +82,7 @@
   "frameTags": [
    { "name": "Closed", "from": 0, "to": 0, "direction": "forward" },
    { "name": "Opening", "from": 1, "to": 6, "direction": "forward" },
+   { "name": "Closing", "from": 1, "to": 6, "direction": "reverse" },
    { "name": "Open", "from": 7, "to": 7, "direction": "forward" }
   ]
  }

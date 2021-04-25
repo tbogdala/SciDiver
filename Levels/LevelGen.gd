@@ -3,13 +3,18 @@ class_name LevelGen
 
 enum Directions {NORTH, EAST, SOUTH, WEST}
 
+
+
 export var max_walk_length: int # max rooms for each walker to walk
 export var max_rooms_total: int # max total rooms to generate
 export var min_rooms_total: int # min total rooms to generate
 export var branch_chance: int # 0..100 odds of walker branching
 export var walker_branch_decay_rate: float # 0..1 how fast the branch_chance decays each walk
+export var max_enemies: int
+export var enemy_spawn_chance: int #0..100 odds to spawn 1..max_enemies enemies
 
 var _total_rooms_made: int
+var _total_enemies_to_make: int
 var _objective_placed: bool
 var _last_node_processed: RoomTreeNode
 
@@ -25,6 +30,9 @@ class RoomTreeNode:
 	# set to true if this room should have the objective terminal spawned
 	var has_objective_terminal: bool
 	
+	# total number of enemies to spawn the first time the room is created
+	var number_of_enemies: int
+	
 	
 # generates a level and returns the 'root' node where the player should spawn.
 func generate_level_nodes() -> RoomTreeNode:
@@ -35,6 +43,7 @@ func generate_level_nodes() -> RoomTreeNode:
 	
 	var room = RoomTreeNode.new()
 	_total_rooms_made = 0
+	_total_enemies_to_make = 0
 	_objective_placed = false
 	_process_node(room)
 	
@@ -60,6 +69,11 @@ func _process_node(node: RoomTreeNode):
 	
 	dirs.shuffle()
 	
+	# see if we need to create monsters
+	if randi() % 100 < enemy_spawn_chance:
+		node.number_of_enemies = randi() % (max_enemies + 1) # 0..max_enemies
+		_total_enemies_to_make += node.number_of_enemies
+				
 	# get the number of new rooms to create, limited by max total rooms
 	var new_door_count = (randi() % (dirs.size()+1)) 
 	if new_door_count + _total_rooms_made > max_rooms_total:
@@ -144,6 +158,14 @@ func instance_room_to(root: Node2D, node: RoomTreeNode):
 			stairs.global_position = Vector2(160, 112)
 			var _err = stairs.connect("StairsDownUsed", root, "request_travel_down_stairs")
 			assert(_err == OK)
+		
+		# spawn enemies in
+		if node.number_of_enemies > 0:
+			for i in range(node.number_of_enemies):
+				var enemy: Node2D = _get_floater_resource().instance()
+				room.add_child(enemy)
+				enemy.global_position = Vector2(48 + (randi()%226), 48+(randi()%156))
+			
 	
 	# show the doors for connected rooms
 	room.enable_travel_areas(false)
@@ -175,6 +197,10 @@ func instance_room_to(root: Node2D, node: RoomTreeNode):
 		room.door_left.visible = false
 		room.door_close_left()
 
+
+func _get_floater_resource() -> Resource:
+	return load("res://Enemies/Floater.tscn")
+	
 func _get_stairs_down_resource() -> Resource:
 	return load("res://Props/StairsDown.tscn")
 	

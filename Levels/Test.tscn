@@ -13,7 +13,7 @@ zoom = Vector2( 4, 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 157.155, 126.951 )
-z_index = 7
+z_index = 0
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 

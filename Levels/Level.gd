@@ -28,6 +28,8 @@ func _ready():
 	level_gen.min_rooms_total = 3
 	level_gen.branch_chance = 33
 	level_gen.walker_branch_decay_rate = 0.66
+	level_gen.max_enemies = 3
+	level_gen.enemy_spawn_chance = 75
 	
 	level_root_node = level_gen.generate_level_nodes()
 	current_node = level_root_node
@@ -130,6 +132,7 @@ func start_hacking_terminal():
 	_hacking_timer.one_shot = false
 	add_child(_hacking_timer)
 	_hacking_timer.start()
+	
 
 func _on_hacking_timer():
 	_current_hack_duration += _hack_timer_interval

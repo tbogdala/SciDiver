@@ -1,0 +1,22 @@
+{ "frames": [
+   {
+    "filename": "FloorShadow.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 20, "h": 5 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 2, "y": 1, "w": 20, "h": 5 },
+    "sourceSize": { "w": 24, "h": 6 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.27-x64",
+  "image": "FloorShadow.png",
+  "format": "RGBA8888",
+  "size": { "w": 20, "h": 5 },
+  "scale": "1",
+  "frameTags": [
+  ]
+ }
+}
