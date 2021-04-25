@@ -15,7 +15,7 @@ collision_mask = 7
 script = ExtResource( 3 )
 
 [node name="Shadow" type="Sprite" parent="."]
-position = Vector2( 15.6811, 13.2973 )
+position = Vector2( 17.0054, 12.7676 )
 texture = ExtResource( 2 )
 flip_h = true
 flip_v = true
@@ -40,7 +40,7 @@ shape = SubResource( 1 )
 [node name="HackingArea" type="Area2D" parent="."]
 visible = false
 position = Vector2( 24.8974, 0 )
-collision_mask = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HackingArea"]
 position = Vector2( -0.897354, 8 )

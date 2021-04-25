@@ -94,7 +94,7 @@ func _do_travel_down_stairs():
 	
 # hard reset player position to north door
 func position_player_north(delay: float):
-	_position_player_by_loc(delay, Vector2(160,55))
+	_position_player_by_loc(delay, Vector2(160,48))
 
 
 # hard reset player position to east door
@@ -104,7 +104,7 @@ func position_player_east(delay: float):
 	
 # hard reset player position to south door
 func position_player_south(delay: float):
-	_position_player_by_loc(delay, Vector2(160,175))
+	_position_player_by_loc(delay, Vector2(160,185))
 
 
 # hard reset player position to west door

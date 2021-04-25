@@ -76,3 +76,8 @@ func _to_state(new_state):
 	
 func _attack_melee_finished():
 	_to_state(States.IDLE)
+
+
+# melee attack has hit something!
+func _on_DamageArea2D_area_entered(area):
+	area.owner._on_take_damage(1)
