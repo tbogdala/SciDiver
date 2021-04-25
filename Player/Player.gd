@@ -40,7 +40,7 @@ func _physics_process(_delta):
 			velocity = Vector2.ZERO
 	
 	if Input.is_action_just_pressed("player_attack_melee"):
-				_to_state(States.ATTACK)
+		_to_state(States.ATTACK)
 		
 	match _current_state:
 		States.IDLE:

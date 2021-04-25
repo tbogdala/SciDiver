@@ -183,4 +183,5 @@ func _get_objective_terminal_resource() -> Resource:
 	
 # returns the room resource to room instance. can be extended for theming
 func _get_room_scene_resource() -> Resource:
-	return load("res://Levels/Designs/Dungeon-Stone-Room.tscn")
+	#return load("res://Levels/Designs/Dungeon-Stone-Room.tscn")
+	return load("res://Levels/Designs/SciFi-Metal-Room.tscn")

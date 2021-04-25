@@ -78,7 +78,6 @@ func _request_travel_dir(dir, new_node: LevelGen.RoomTreeNode):
 	
 
 func request_travel_down_stairs():
-	print("REQUESTING TRAVEL DOWN STAIRS")
 	self.call_deferred("_do_travel_down_stairs")
 	
 func _do_travel_down_stairs():
