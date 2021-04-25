@@ -11,6 +11,15 @@ terminals on each level while fighting off enemies.
 
 The HTML5 build of this should hopefully be accessible on github under the *docs* folder.
 
+INSTRUCTIONS
+============
+
+WASD - movement
+H - hack the terminal when it's found
+space - attack with a sword
+
+Joysticks may work too, but this was untested.
+
 
 LICENSE
 =======
