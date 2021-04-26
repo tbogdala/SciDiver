@@ -3,7 +3,7 @@ SciDiver
 
 Author: Timothy Bogdala (tdb@animal-machine.net)
 
-![screenshot](https://tbogdala.github.com/screenshots/Screenshot.jpeg)
+![screenshot](https://github.com/tbogdala/SciDiver/blob/main/screenshots/Screenshot.jpeg)
 
 Ludum Dare 48 entry! I made it in time to have it considered as a Compo entry. There's no music or sound effects,
 so I have to opt out of those categories.
