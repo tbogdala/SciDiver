@@ -12,7 +12,9 @@ A sci-fi game where you attempt to delve deeper and deeper into a fortress by ha
 terminals on each level while fighting off enemies. As you go deeper and deeper there
 will be more monsters and they will fly faster.
 
-The HTML5 build of this should hopefully be accessible on github under the *docs* folder.
+The HTML5 build of this can be played directly from github:
+
+https://tbogdala.github.io/SciDiver/index.html
 
 INSTRUCTIONS
 ============
